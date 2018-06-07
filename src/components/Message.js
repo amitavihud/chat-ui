@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
 
-import snorlax from './assets/001-snorlax.png'
-
 const Styled = styled.div`
   display: grid;
   padding: 5px;
@@ -39,14 +37,20 @@ const Arrow = styled.div`
 	border-right-color: ${props => props.backgroundColor};
 	border-width: 3px;
 `
+const Sender = styled.span`
+  text-decoration: underline;
+  font-weight: bold;
+  padding-right: 4px;
+`
 
 export default (props) => (
   <Styled>
-    <img src={snorlax} />
+    <img src={props.message.avatar} />
     <TextContainer>
-      <Bubble backgroundColor={'#5152FA'} color={'#F2F2FF'}>
-        <Arrow backgroundColor={'#5152FA'} />
-        {props.children}
+      <Bubble backgroundColor={props.me ? '#5152FA' : 'white'} color={props.me ? '#F2F2FF' : '#6D6E86'}>
+        <Arrow backgroundColor={props.me ? '#5152FA' : 'white'} />
+        <Sender>{props.message.username}:</Sender>
+        {props.message.text}
       </Bubble>
     </TextContainer>
   </Styled>

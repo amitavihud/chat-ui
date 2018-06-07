@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from "styled-components";
-import logo from './assets/002-psyduck.png'
+
 const Container = styled.div`
   padding: 10px;
   display: grid;
@@ -58,16 +58,56 @@ const Send = styled.button`
 `
 
 export default class MessageInput extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      name: '',
+      message: ''
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this)
+    this.handleMessageChange = this.handleMessageChange.bind(this)
+  }
+  static getDerivedStateFromProps(props, state){
+    if (!state.name) {
+      return {
+        name: props.username
+      }
+    }
+    return null
+  }
+  handleSubmit() {
+    this.props.onSubmit({
+      name: this.state.name,
+      message: this.state.message,
+      avatarURL:this.props.avatarURL
+    })
+    this.setState({
+      message: ''
+    })
+  }
+  handleNameChange(e) {
+    this.setState({
+      name: e.target.value
+    })
+  }
+  handleMessageChange(e) {
+    this.setState({
+      message: e.target.value
+    })
+  }
   render() {
     return (
       <Container>
         <NameInputContainer>
-          <img className="avatar" src={logo} />
-          <Input placeholder="Your name" value="Amit Avihud" />
+          <img className="avatar" src={this.props.avatarURL} />
+          <Input placeholder="Your name" onChange={this.handleNameChange} value={this.state.name} />
         </NameInputContainer>
-        <Message placeholder="Message" />
+        <Message placeholder="Message" onChange={this.handleMessageChange} value={this.state.message} />
         <SendContainer>
-          <Send>Send</Send>
+          <Send onClick={this.handleSubmit}>Send</Send>
         </SendContainer>        
       </Container>
     )
