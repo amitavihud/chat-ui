@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message component it is me renders the tree correctly 1`] = `
+<div
+  className="sc-bdVaJa eMAKFS"
+>
+  <img
+    src={undefined}
+  />
+  <div
+    className="sc-bwzfXH gheIUh"
+  >
+    <div
+      className="sc-htpNat jQRWOW"
+      color="#F2F2FF"
+    >
+      <div
+        className="sc-bxivhb CqVgY"
+      />
+      <span
+        className="sc-ifAKCX BnkYH"
+      >
+        :
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Message component renders the tree 1`] = `
+<div
+  className="sc-bdVaJa eMAKFS"
+>
+  <img
+    src={undefined}
+  />
+  <div
+    className="sc-bwzfXH gheIUh"
+  >
+    <div
+      className="sc-htpNat bGHIjC"
+      color="#6D6E86"
+    >
+      <div
+        className="sc-bxivhb iwyfOA"
+      />
+      <span
+        className="sc-ifAKCX BnkYH"
+      >
+        :
+      </span>
+    </div>
+  </div>
+</div>
+`;

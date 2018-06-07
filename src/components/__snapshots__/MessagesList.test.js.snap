@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessagesList component renders the tree 1`] = `
+<div
+  className="sc-EHOje faCQco"
+  onScroll={[Function]}
+/>
+`;
+
+exports[`MessagesList component there are some messages renders them 1`] = `
+<div
+  className="sc-EHOje faCQco"
+  onScroll={[Function]}
+>
+  <div
+    className="sc-bdVaJa eMAKFS"
+  >
+    <img
+      src="someurl.com/1.png"
+    />
+    <div
+      className="sc-bwzfXH gheIUh"
+    >
+      <div
+        className="sc-htpNat jQRWOW"
+        color="#F2F2FF"
+      >
+        <div
+          className="sc-bxivhb CqVgY"
+        />
+        <span
+          className="sc-ifAKCX BnkYH"
+        >
+          Donald
+          :
+        </span>
+        1
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-bdVaJa eMAKFS"
+  >
+    <img
+      src="someurl.com/2.png"
+    />
+    <div
+      className="sc-bwzfXH gheIUh"
+    >
+      <div
+        className="sc-htpNat jQRWOW"
+        color="#F2F2FF"
+      >
+        <div
+          className="sc-bxivhb CqVgY"
+        />
+        <span
+          className="sc-ifAKCX BnkYH"
+        >
+          Kim
+          :
+        </span>
+        1
+      </div>
+    </div>
+  </div>
+</div>
+`;

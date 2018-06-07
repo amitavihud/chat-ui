@@ -55,6 +55,11 @@ const Send = styled.button`
   &:active {
     background-color: #289154;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #a7d9bc;
+  }
 `
 
 export default class MessageInput extends React.Component {
@@ -98,6 +103,9 @@ export default class MessageInput extends React.Component {
       message: e.target.value
     })
   }
+  isEmpty() {
+    return !this.state.message || !this.state.message.trim()
+  }
   render() {
     return (
       <Container>
@@ -107,7 +115,7 @@ export default class MessageInput extends React.Component {
         </NameInputContainer>
         <Message placeholder="Message" onChange={this.handleMessageChange} value={this.state.message} />
         <SendContainer>
-          <Send onClick={this.handleSubmit}>Send</Send>
+          <Send onClick={this.isEmpty() ? undefined : this.handleSubmit} disabled={this.isEmpty()}>Send</Send>
         </SendContainer>        
       </Container>
     )

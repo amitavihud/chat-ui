@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageInput component renders correctly 1`] = `
+<div
+  className="sc-bdVaJa kgIdzV"
+>
+  <div
+    className="sc-bxivhb ieUFMR"
+  >
+    <img
+      className="avatar"
+      src={undefined}
+    />
+    <input
+      className="sc-bwzfXH iqTZal"
+      onChange={[Function]}
+      placeholder="Your name"
+      value={undefined}
+    />
+  </div>
+  <textarea
+    className="sc-htpNat guXHJY"
+    onChange={[Function]}
+    placeholder="Message"
+    value=""
+  />
+  <div
+    className="sc-ifAKCX dmLNXp"
+  >
+    <button
+      className="sc-EHOje gHrGfF"
+      disabled={true}
+      onClick={undefined}
+    >
+      Send
+    </button>
+  </div>
+</div>
+`;

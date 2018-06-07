@@ -7,7 +7,7 @@ import Container from './components/Container'
 
 import { getAvatarURL, setAvatarURL, getUUID, setUUID, getUsername, setUsername } from './lib/storage';
 import { logos } from './lib/logos'
-import { connect, submitMessage, CHAT_TOPIC } from './lib/socket';
+import { connect, disconnect, submitMessage, CHAT_TOPIC } from './lib/socket';
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class App extends Component {
     }
     
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.receivedMessage = this.receivedMessage.bind(this)
   }
   componentDidMount() {
     connect((on) => {
@@ -29,11 +30,15 @@ class App extends Component {
         ready: true
       })
 
-      on(CHAT_TOPIC, data => {
-        this.setState({
-          messages: [...this.state.messages, data]
-        })
-      })
+      on(CHAT_TOPIC, this.receivedMessage)
+    })
+  }
+  componentWillUnmount() {
+    disconnect()
+  }
+  receivedMessage(data) {
+    this.setState({
+      messages: [...this.state.messages, data]
     })
   }
   handleSubmit({ name, message, avatarURL }) {

@@ -17,3 +17,7 @@ export const connect = (onReady) => {
 export const submitMessage = (message) => {
   socket.emit(CHAT_TOPIC, message)
 }
+
+export const disconnect = () => {
+  socket.close()
+}
