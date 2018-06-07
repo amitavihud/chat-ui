@@ -7,7 +7,7 @@ import Container from './components/Container'
 
 import { getAvatarURL, setAvatarURL, getUUID, setUUID, getUsername, setUsername } from './lib/storage';
 import { logos } from './lib/logos'
-import { getStream } from './lib/stream';
+import { connect, submitMessage, CHAT_TOPIC } from './lib/socket';
 
 class App extends Component {
   constructor(props) {
@@ -15,59 +15,33 @@ class App extends Component {
 
     this.state = {
       ready: false,
-      messages: []
+      messages: [],
+      avatarURL: getAvatarURL() || setAvatarURL(logos[Math.floor(Math.random() * 5)]),
+      userId: getUUID() || setUUID(uuid()),
+      username: getUsername()
     }
-    this.stream = getStream()
-
+    
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  async _prepareAvatar(){
-    let avatarURL = await getAvatarURL()
-    if (!avatarURL) {
-      avatarURL = await setAvatarURL(logos[Math.floor(Math.random() * 5)])
-    }
-
-    return avatarURL
-  }
-  async _prepareUUID(){
-    let userId = await getUUID()
-    if (!userId) {
-      userId = await setUUID(uuid())
-    }
-
-    return userId
-  }
   componentDidMount() {
-    this.stream.once('connect', async () => {
-      const avatarURL = await this._prepareAvatar()
-      const userId = await this._prepareUUID()
-      const username = await getUsername()
+    connect((on) => {
+      this.setState({
+        ready: true
+      })
 
-      this.stream.on('spotim/chat', (data) => {
-        console.log(data)
+      on(CHAT_TOPIC, data => {
         this.setState({
           messages: [...this.state.messages, data]
         })
       })
-
-      this.setState({
-        avatarURL,
-        userId,
-        username,
-        ready: true
-      })
     })
   }
-  handleSubmit({
-    name,
-    message,
-    avatarURL
-  }) {
+  handleSubmit({ name, message, avatarURL }) {
     setUsername(name)
     this.setState({
       username: name
     })
-    this.stream.emit('spotim/chat', {
+    submitMessage({
       avatar: avatarURL,
       username: name,
       text: message,
@@ -80,6 +54,7 @@ class App extends Component {
         <div>Please wait while we're loading</div>
       )
     }
+
     return (
       <Container>
         <MessagesList messages={this.state.messages} userId={this.state.userId}>ChatUI</MessagesList>
